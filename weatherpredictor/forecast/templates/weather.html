@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="icon" href="{% static 'img/icon.ico' %}" type="image/icon type">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Weather Forecast</title>
+</head>
+
+<body>
+    <main class="{{ description }}">
+        <!-- Sidebar -->
+        <section class="side-container">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="search-container">
+                    <div style="width: 22px; height: 22px; color: white;" class="weather-icon">
+                        <i class="bi bi-cloud-fog-fill"></i>
+                    </div>
+                    <input type="text" name="city" class="geo-input" placeholder="Enter city name"
+                        value="{{ location }}" />
+                    <button class="search-button">
+                        <div style="width: 22px; height: 25px; color: white;">
+                            <i class="bi bi-search"></i>
+                        </div>
+                    </button>
+                </div>
+            </form>
+
+            <div class="days-stats">
+                <h2 class="days-stats__temperature">
+                    <span class="days-stats__temperature_value">{{ current_temp }}</span>°
+                </h2>
+                <h3 class="days-stats__feelslike">
+                    Feels like: <span class="days-stats__feelslike_value">{{ feels_like }}</span>°
+                </h3>
+                <ul class="days-stats_conditions">
+                    <li>
+                        <div class="condition-value"><span>{{ humidity }}</span><span>%</span></div>
+                        <div class="condition-label">Humidity</div>
+                    </li>
+                    <li>
+                        <div class="condition-value"><span>{{ clouds }}</span><span>%</span></div>
+                        <div class="condition-label">Clouds</div>
+                    </li>
+                </ul>
+            </div>
+            <img src="{% static 'img/side-blur.png' %}" class="side-blur" alt="blur" />
+        </section>
+
+        <!-- Main content -->
+        <section class="main-container">
+            <h4 class="secondary-title">Weather forecast</h4>
+            <h1 class="weather__primary-title">{{ description }}</h1>
+
+            <div class="weather__location">
+                <div style="width: 15px; height: 15px; color: white;" class="location-icon">
+                    <i class="bi bi-geo-alt-fill"></i>
+                </div>
+                <p class="weather__location-text">
+                    <span class="weather__location-city">{{ city }}</span>
+                    <span class="weather__location-country">{{ country }}</span>
+                    <span class="weather__location-date">{{ time }}</span>
+                </p>
+            </div>
+
+            <p class="weather__primary-stats">
+                Wind <span class="weatherWindKph">{{ wind }}</span> Kmph,
+                Pressure <span class="weatherPressure">{{ pressure }}</span> mb.
+                Visibility is <span class="weatherSnow">{{ visibility }}</span>.
+                {% if max_temp and min_temp %}
+                Maximum temperature is {{ max_temp }}° and minimum temperature is {{ min_temp }}°.
+                {% endif %}
+            </p>
+
+            <!-- Forecast cards -->
+            <ul class="forecast">
+                <li class="forecast-item">
+                    <p class="forecast-icon"><i class="bi bi-cloud-sun"></i></p>
+                    <p class="forecast-time">{{ time1 }}</p>
+                    <p class="forecast-temparature"><span class="forecast-temperatureValue">{{ temp1 }}</span>°</p>
+                    <p class="forecastWindText">Humidity: <span class="forecast-humidityValue">{{ hum1 }}</span></p>
+                </li>
+                <li class="forecast-item">
+                    <p class="forecast-icon"><i class="bi bi-cloud-sun"></i></p>
+                    <p class="forecast-time">{{ time2 }}</p>
+                    <p class="forecast-temparature"><span class="forecast-temperatureValue">{{ temp2 }}</span>°</p>
+                    <p class="forecastWindText">Humidity: <span class="forecast-humidityValue">{{ hum2 }}</span></p>
+                </li>
+                <li class="forecast-item">
+                    <p class="forecast-icon"><i class="bi bi-cloud-sun"></i></p>
+                    <p class="forecast-time">{{ time3 }}</p>
+                    <p class="forecast-temparature"><span class="forecast-temperatureValue">{{ temp3 }}</span>°</p>
+                    <p class="forecastWindText">Humidity: <span class="forecast-humidityValue">{{ hum3 }}</span></p>
+                </li>
+                <li class="forecast-item">
+                    <p class="forecast-icon"><i class="bi bi-cloud-sun"></i></p>
+                    <p class="forecast-time">{{ time4 }}</p>
+                    <p class="forecast-temparature"><span class="forecast-temperatureValue">{{ temp4 }}</span>°</p>
+                    <p class="forecastWindText">Humidity: <span class="forecast-humidityValue">{{ hum4 }}</span></p>
+                </li>
+                <li class="forecast-item">
+                    <p class="forecast-icon"><i class="bi bi-cloud-sun"></i></p>
+                    <p class="forecast-time">{{ time5 }}</p>
+                    <p class="forecast-temparature"><span class="forecast-temperatureValue">{{ temp5 }}</span>°</p>
+                    <p class="forecastWindText">Humidity: <span class="forecast-humidityValue">{{ hum5 }}</span></p>
+                </li>
+            </ul>
+
+            <!-- Dropdown + Chart -->
+            <div style="margin: 10px 0;">
+                <select id="dataToggle" style="padding: 6px 12px; border-radius: 6px; border: none; font-size: 14px;">
+                    <option value="temp">Temperature</option>
+                    <option value="hum">Humidity</option>
+                </select>
+            </div>
+
+            <canvas id="chart" height="45px"></canvas>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="{% static 'js/chartSetup.js' %}"></script>
+</body>
+
+</html>
