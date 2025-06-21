@@ -13,7 +13,7 @@ from sklearn.ensemble import RandomForestClassifier,RandomForestRegressor
 
 
 
-API_KEY='c85b9e82c2a573aa97887e22f20db53d'
+API_KEY='-'
 BASE_URL='https://api.openweathermap.org/data/2.5/'
 
 #fetch current weather data
