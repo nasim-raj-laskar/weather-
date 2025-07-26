@@ -1,0 +1,12 @@
+Django
+pytz
+requests
+numpy
+pandas
+scikit-learn
+# Production dependencies for Render
+gunicorn
+python-dotenv
+dj-database-url
+psycopg2-binary
+whitenoise

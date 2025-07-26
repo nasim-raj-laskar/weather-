@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 import pytz
 import requests
 import numpy as np
@@ -13,7 +14,8 @@ from sklearn.ensemble import RandomForestClassifier,RandomForestRegressor
 
 
 
-API_KEY='c85b9e82c2a573aa97887e22f20db53d'
+load_dotenv()
+API_KEY = os.getenv('API_KEY')
 BASE_URL='https://api.openweathermap.org/data/2.5/'
 
 #fetch current weather data
