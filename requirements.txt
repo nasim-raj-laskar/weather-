@@ -1,10 +1,11 @@
-whitenoise
 Django
 pytz
 requests
 numpy
 pandas
 scikit-learn
+whitenoise>=6.6.0
+
 # Production dependencies for Render
 gunicorn
 python-dotenv
